@@ -1,5 +1,5 @@
 # Build stage
-FROM --platform=$BUILDPLATFORM cgr.dev/chainguard/wolfi-base:latest AS builder
+FROM --platform=$TARGETPLATFORM cgr.dev/chainguard/wolfi-base:latest AS builder
 
 # Import build arguments for cross-compilation
 ARG BUILDPLATFORM
@@ -102,6 +102,19 @@ ADD https://doc-sqlite-db.s3.sa-east-1.amazonaws.com/gloo-edge.db /app/build/glo
 ADD https://doc-sqlite-db.s3.sa-east-1.amazonaws.com/otel.db /app/build/otel.db
 ADD https://doc-sqlite-db.s3.sa-east-1.amazonaws.com/cilium.db /app/build/cilium.db
 ADD https://doc-sqlite-db.s3.sa-east-1.amazonaws.com/ambient.db /app/build/ambient.db
+
+# Platform-specific databases
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/evermind.db /app/build/evermind.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/agentgateway-docs.db /app/build/agentgateway-docs.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/kagent-docs.db /app/build/kagent-docs.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/mongodb.db /app/build/mongodb.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/mongodb-atlas.db /app/build/mongodb-atlas.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/agentgateway-code.db /app/build/agentgateway-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/agentregistry-code.db /app/build/agentregistry-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/kagent-code.db /app/build/kagent-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/kmcp-code.db /app/build/kmcp-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/evermemos-code.db /app/build/evermemos-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/istio-code.db /app/build/istio-code.db
 
 #show cheksum for every db file
 RUN for file in /app/build/*.db; do echo "Checksum for $file:";sha256sum "$file";done

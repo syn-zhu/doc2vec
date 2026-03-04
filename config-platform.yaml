@@ -1,0 +1,152 @@
+# Platform-specific doc2vec sources
+# Only includes NEW sources — upstream databases (kubernetes, istio, etc.)
+# are already baked into the base Docker image.
+#
+# Usage:
+#   cd vendor/doc2vec
+#   OPENAI_API_KEY=<key> node dist/doc2vec.js config-platform.yaml
+
+embedding:
+  provider: 'openai'
+  dimension: 3072
+  openai:
+    model: 'text-embedding-3-large'
+
+sources:
+  # ── Website Sources ──
+
+  - type: website
+    product_name: 'evermind'
+    version: 'latest'
+    url: 'https://docs.evermind.ai/'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './evermind.db'
+
+  - type: website
+    product_name: 'agentgateway-docs'
+    version: 'latest'
+    url: 'https://agentgateway.dev/docs/kubernetes/latest/'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './agentgateway-docs.db'
+
+  - type: website
+    product_name: 'kagent-docs'
+    version: 'latest'
+    url: 'https://kagent.dev/docs/kagent'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './kagent-docs.db'
+
+  - type: website
+    product_name: 'mongodb'
+    version: 'latest'
+    url: 'https://www.mongodb.com/docs/manual/'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './mongodb.db'
+
+  - type: website
+    product_name: 'mongodb-atlas'
+    version: 'latest'
+    url: 'https://www.mongodb.com/docs/atlas/'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './mongodb-atlas.db'
+
+  # ── Code Sources ──
+
+  - type: code
+    source: github
+    product_name: 'agentgateway'
+    version: 'latest'
+    repo: 'agentgateway/agentgateway'
+    branch: 'main'
+    include_extensions: ['.go', '.rs', '.toml', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './agentgateway-code.db'
+
+  - type: code
+    source: github
+    product_name: 'agentregistry'
+    version: 'latest'
+    repo: 'agentregistry-dev/agentregistry'
+    branch: 'main'
+    include_extensions: ['.go', '.ts', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './agentregistry-code.db'
+
+  - type: code
+    source: github
+    product_name: 'kagent'
+    version: 'latest'
+    repo: 'kagent-dev/kagent'
+    branch: 'main'
+    include_extensions: ['.go', '.py', '.ts', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './kagent-code.db'
+
+  - type: code
+    source: github
+    product_name: 'kmcp'
+    version: 'latest'
+    repo: 'kagent-dev/kmcp'
+    branch: 'main'
+    include_extensions: ['.go', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './kmcp-code.db'
+
+  - type: code
+    source: github
+    product_name: 'evermemos'
+    version: 'latest'
+    repo: 'EverMind-AI/EverMemOS'
+    branch: 'main'
+    include_extensions: ['.py', '.ts', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './evermemos-code.db'
+
+  - type: code
+    source: github
+    product_name: 'istio'
+    version: 'latest'
+    repo: 'istio/istio'
+    branch: 'master'
+    include_extensions: ['.go', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './istio-code.db'
