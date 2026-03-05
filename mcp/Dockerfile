@@ -115,6 +115,8 @@ ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/kagent-code.db /
 ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/kmcp-code.db /app/build/kmcp-code.db
 ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/evermemos-code.db /app/build/evermemos-code.db
 ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/istio-code.db /app/build/istio-code.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/keycloak-docs.db /app/build/keycloak-docs.db
+ADD https://agentic-platform-doc2vec.s3.us-east-1.amazonaws.com/keycloak-code.db /app/build/keycloak-code.db
 
 #show cheksum for every db file
 RUN for file in /app/build/*.db; do echo "Checksum for $file:";sha256sum "$file";done

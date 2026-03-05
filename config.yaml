@@ -224,6 +224,16 @@ sources:
       params:
         db_path: './mongodb-atlas.db'
 
+  - type: website
+    product_name: 'keycloak-docs'
+    version: 'latest'
+    url: 'https://www.keycloak.org/docs/latest/'
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './keycloak-docs.db'
+
   # ── Platform-specific Code Sources ──
 
   - type: code
@@ -309,3 +319,17 @@ sources:
       type: 'sqlite'
       params:
         db_path: './istio-code.db'
+
+  - type: code
+    source: github
+    product_name: 'keycloak'
+    version: 'latest'
+    repo: 'keycloak/keycloak'
+    branch: 'main'
+    include_extensions: ['.java', '.xml', '.yaml', '.md']
+    chunk_size: 512
+    max_size: 1048576
+    database_config:
+      type: 'sqlite'
+      params:
+        db_path: './keycloak-code.db'
